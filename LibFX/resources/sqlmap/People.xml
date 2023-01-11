@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="lib.people">
+
+	<resultMap id="People" type="People">
+		<result property="pid" column="pid" />
+		<result property="ppw" column="ppw" />
+		<result property="pname" column="pname" />
+		<result property="pssnumber" column="pssnumber" />
+		<result property="pphone" column="pphone" />
+		<result property="pbnumber" column="pbnumber" />
+		<result property="ppoint" column="ppoint" />
+		<result property="ptier" column="ptier" />
+	</resultMap>
+
+	<select id="peopleSearch" parameterType="People"
+		resultType="People">
+		<![CDATA[ 
+		SELECT pid, ppw, pname, pssnumber, pphone, pbnumber, ppoint
+		FROM user
+		WHERE pname like concat('%', #{pname}, '%')
+		]]>
+	</select>
+
+	<select id="loginpage" parameterType="People" resultMap="People">
+		<![CDATA[ 
+		SELECT pid, ppw, pname, pssnumber, pphone, pbnumber, ppoint
+		FROM user
+		WHERE pid = #{pid} and ppw = #{ppw}
+		]]>
+	</select>
+
+	<select id="IDfind" parameterType="People" resultType="People">
+		<![CDATA[ 
+		SELECT pid, ppw, pname, pssnumber 
+		FROM user
+		WHERE pname = #{pname} and pssnumber = #{pssnumber}
+		]]>
+	</select>
+
+	<select id="PWfind" parameterType="People" resultMap="People">
+		<![CDATA[ 
+		SELECT pid, ppw, pname, pssnumber 
+		FROM user
+		WHERE pname = #{pname} and pssnumber = #{pssnumber} and pid = #{pid}
+		]]>
+	</select>
+
+	<insert id="NewAssign" parameterType="People">
+		<![CDATA[ 
+		INSERT INTO user (pid, ppw, pname, pssnumber, pphone)
+		VALUES (#{pid}, #{ppw}, #{pname}, #{pssnumber}, #{pphone})
+		]]>
+	</insert>
+
+	<select id="PeopleInf" parameterType="People" resultType="People">
+		<![CDATA[ 
+		SELECT pid, ppw, pname, pssnumber, pphone
+		FROM user
+		WHERE pid = #{pid}
+		]]>
+	</select>
+
+	<delete id="DeletePeople" parameterType="People">
+		<![CDATA[ 
+		DELETE 
+		FROM user
+		WHERE pid = #{pid}
+		]]>
+	</delete>
+
+	<select id="IDMatch" parameterType="People" resultType="People">
+		<![CDATA[ 
+		SELECT pid, ppw, pname, pssnumber 
+		FROM user
+		WHERE pid = #{pid}
+		]]>
+	</select>
+
+	<update id="Peopleinfins" parameterType="People">
+		<![CDATA[ 
+		UPDATE user 
+		SET  ppw = #{ppw}, pname = #{pname}, pssnumber = #{pssnumber}, pphone = #{pphone}
+		WHERE pid = #{pid}
+		]]>
+	</update>
+
+	<update id="Peoplepointcount" parameterType="People">
+		<![CDATA[ 
+		UPDATE user 
+		SET  pbnumber = #{pbnumber}, ppoint = #{ppoint}
+		WHERE pid = #{pid}
+		]]>
+	</update>
+	
+</mapper>

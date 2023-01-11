@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="lib.bookInf">
+<!-- 
+	<resultMap id="BookInfVO" type="BookInfVO">
+		<result property="bnumber" column="bnumber" />
+		<result property="pid" column="pid" />
+		<result property="bisbn" column="bisbn" />
+		<result property="btitle" column="btitle" />
+		<result property="bdate" column="bdate" />
+		<result property="bpage" column="bpage" />
+		<result property="bprice" column="bprice" />
+		<result property="bauthor" column="bauthor" />
+		<result property="btranslator" column="btranslator" />
+		<result property="bsupplement" column="bsupplement" />
+		<result property="bpublisher" column="bpublisher" />
+		<result property="bimgurl" column="bimgurl" />
+		<result property="bbrrowdate" column="bbrrowdate" />
+		<result property="breturndate" column="breturndate" />
+		<result property="bpoint" column="bpoint" />
+		<result property="bhave" column="bhave" />
+	</resultMap>
+
+ -->
+
+	<select id="BookDetInf" parameterType="BookInfVO"
+		resultType="BookInfVO">
+		<![CDATA[ 
+		SELECT pid, bnumber, bisbn, btitle, bdate, bpage, bprice, bauthor, bborrowdate, breturndate, bpoint, bhave 
+   		FROM bookinf 
+		WHERE pid = #{pid}
+		]]>
+	</select>
+
+	<select id="selectbhave" parameterType="BookInfVO"
+		resultType="BookInfVO">
+		<![CDATA[ 
+		SELECT pid, bnumber, bisbn, btitle, bdate, bpage, bprice, bauthor, bborrowdate, breturndate, bpoint, bhave 
+   		FROM bookinf 
+		WHERE bhave like '대여중' 
+		]]>
+	</select>
+
+	<update id="Bookreturn" parameterType="BookInfVO">
+		<![CDATA[ 
+		UPDATE bookinf 
+   		SET  bhave = '도서관보유중'
+		WHERE bisbn = #{bisbn}
+		]]>
+	</update>
+
+	<insert id="Bookborrowinfvo" parameterType="BookInfVO">
+		<![CDATA[ 
+		INSERT INTO bookinf (bnumber, pid, bisbn, btitle, bdate, bpage, bprice, bauthor, btranslator, 
+		bsupplement, bpublisher, bimgurl, bborrowdate, breturndate, bpoint, bhave)
+   		VALUES (null, #{pid}, #{bisbn}, #{btitle}, #{bdate}, #{bpage}, #{bprice}, 
+   					#{bauthor}, #{btranslator}, #{bsupplement}, #{bpublisher}, #{bimgurl} , DATE_FORMAT(now(), '%Y%m%d'), DATE_FORMAT(now(), '%Y%m%d') + '10', 0, '대여중')
+		]]>
+	</insert>
+
+	<update id="PointCalcul" parameterType="BookInfVO">
+		<![CDATA[ 
+		UPDATE bookinf 
+   		SET  bpoint = (bpoint + breturndate - DATE_FORMAT(now(), '%Y%m%d'))
+		WHERE pid = #{pid}
+		]]>
+	</update>
+
+	<select id="mainPointView" parameterType="String"
+		resultType="BookInfVO">
+		<![CDATA[ 
+		SELECT pid, MAX(bpoint) as bpoint
+   		FROM bookinf 
+		WHERE pid = #{pid} GROUP BY pid 
+		]]>
+	</select>
+
+	<select id="bookHaveCheck" parameterType="String"
+		resultType="BookInfVO">
+		<![CDATA[ 
+		SELECT bnumber, bisbn, bhave
+   		FROM bookinf 
+		WHERE bnumber = #{bnumber}
+		]]>
+	</select>
+
+	<select id="PeopleUpdatenp" parameterType="String"
+		resultType="BookInfVO">
+		<![CDATA[ 
+		SELECT MAX(bnumber) as bnumber, pid, MAX(bpoint) as bpoint
+   		FROM bookinf 
+		WHERE pid = #{pid} GROUP BY pid 
+		]]>
+	</select>
+
+</mapper>

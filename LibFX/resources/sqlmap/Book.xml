@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="lib.book">
+
+	<resultMap id="BookVO" type="BookVO">
+		<result property="bisbn" column="bisbn" />
+		<result property="btitle" column="btitle" />
+		<result property="bdate" column="bdate" />
+		<result property="bpage" column="bpage" />
+		<result property="bprice" column="bprice" />
+		<result property="bauthor" column="bauthor" />
+		<result property="bhave" column="bhave" />
+		<result property="btranslator" column="btranslator" />
+		<result property="bsupplement" column="bsupplement" />
+		<result property="bpublisher" column="bpublisher" />
+		<result property="bimgurl" column="bimgurl" />
+	</resultMap>
+  
+	<select id="selectbtitlesearch" parameterType="BookVO" resultType="BookVO">
+		<![CDATA[ 
+		SELECT bisbn, btitle, bdate, bpage, bprice, bauthor, bhave 
+   		FROM book 
+		WHERE btitle like concat('%', #{btitle}, '%')
+		]]>
+	</select>
+	
+	<select id="detailselect" parameterType="String" resultType="BookVO">
+		<![CDATA[ 
+		SELECT bisbn, btitle, bdate, bpage, bprice, bauthor, btranslator, bsupplement, bpublisher, bimgurl
+		FROM book
+		WHERE btitle like concat('%', #{btitle}, '%')
+		]]>
+	</select>
+
+	<insert id="BookNewAssign" parameterType="BookVO">
+		<![CDATA[ 
+		INSERT INTO book (bisbn, btitle, bdate, bpage, bprice, bauthor, btranslator, bsupplement, bpublisher, bimgurl, bhave)
+		VALUES (#{bisbn}, #{btitle}, #{bdate}, #{bpage}, #{bprice}, #{bauthor}, #{btranslator}, #{bsupplement}, #{bpublisher}, #{bimgurl}, '도서관보유중')
+		]]>
+	</insert>
+
+	<delete id="DeleteBooks" parameterType="BookVO">
+		<![CDATA[ 
+		DELETE FROM book
+		WHERE bisbn = #{bisbn}
+		]]>
+	</delete>
+
+	<select id="Bookinfstyle" parameterType="BookVO" resultType="BookVO">
+		<![CDATA[ 
+		SELECT * 
+		FROM book
+		WHERE bisbn = #{bisbn}
+		]]>
+	</select>
+
+	<update id="Bookinfins" parameterType="BookVO">
+		<![CDATA[ 
+		UPDATE book 
+		SET  bisbn = #{bisbn}, btitle =  #{btitle}, bdate =  #{bdate}, bpage =  #{bpage}, bprice =  #{bprice}, bauthor =  #{bauthor}, 
+				+ btranslator =  #{btranslator}, bsupplement =  #{bsupplement}, bpublisher =  #{bpublisher}, bimgurl =  #{bimgurl} 
+		WHERE bisbn = #{bisbn}
+		]]>
+	</update>
+
+	<update id="BookreturnVO" parameterType="BookVO">
+		<![CDATA[ 
+		UPDATE book
+		SET  bhave = '도서관보유중'
+		WHERE bisbn = #{bisbn}
+		]]>
+	</update>
+	
+	<update id="Bookborrow" parameterType="BookVO">
+		<![CDATA[ 
+		UPDATE book
+		SET  bhave = '대여중' 
+		WHERE bisbn = #{bisbn}
+		]]>
+	</update>
+
+	<select id="Bookborrowcheck" parameterType="BookVO" resultType="BookVO">
+		<![CDATA[ 
+		SELECT *
+		FROM book 
+		WHERE bisbn = #{bisbn}
+		]]>
+	</select>
+
+</mapper>
