@@ -63,10 +63,11 @@ Image 추가
 <img src = "Idfind.png" width="30%" height="30%">
 <img src = "Pwfing.png" width="30%" height="30%">
 <img src = "Newassign.png" width="30%" height="30%">
+<img src = "Bookadd.png" width="10%" height="10%">
+<img src = "peopleinf.png" width="30%" height="30%">
 <img src = "Mainpage.png">
 <img src = "Bookreturn.png">
 <img src = "Peoplesearch.png">
 <img src = "bookdetail.png">
 <img src = "Booknoreturn.png">
-<img src = "Bookadd.png" width="30%" height="30%">
-<img src = "peopleinf.png" width="30%" height="30%">
+
