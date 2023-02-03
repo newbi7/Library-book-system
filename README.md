@@ -64,9 +64,9 @@ Image 추가
 <img src = "Pwfing.png" width="50%" height="50%">
 <img src = "Newassign.png" width="50%" height="50%">
 <img src = "Mainpage.png">
-<img src = "peopleinf.png" width="50%" height="50%">
-<img src = "Bookreturn.png" width="50%" height="50%">
-<img src = "Peoplesearch.png" width="50%" height="50%">
-<img src = "bookdetail.png" width="50%" height="50%">
-<img src = "Booknoreturn.png" width="50%" height="50%">
-<img src = "Bookadd.png" width="50%" height="50%">
+<img src = "Bookreturn.png">
+<img src = "Peoplesearch.png">
+<img src = "bookdetail.png">
+<img src = "Booknoreturn.png">
+<img src = "Bookadd.png" width="30%" height="30%">
+<img src = "peopleinf.png" width="30%" height="30%">
