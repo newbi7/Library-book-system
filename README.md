@@ -58,11 +58,11 @@ BookNonPaymentc -> 미납도서검색
 peopleVO, bookVO, bookInfVO
 ```
 
-Image 추가
-<img src = "Loginview.png" width="50%" height="50%">
-<img src = "Idfind.png" width="50%" height="50%">
-<img src = "Pwfing.png" width="50%" height="50%">
-<img src = "Newassign.png" width="50%" height="50%">
+Image 추가   
+<img src = "Loginview.png" width="30%" height="30%">
+<img src = "Idfind.png" width="30%" height="30%">
+<img src = "Pwfing.png" width="30%" height="30%">
+<img src = "Newassign.png" width="30%" height="30%">
 <img src = "Mainpage.png">
 <img src = "Bookreturn.png">
 <img src = "Peoplesearch.png">
