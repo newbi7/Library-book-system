@@ -51,7 +51,7 @@ BookInfdelc -> 도서 정보수정/삭제
 
 BookInfaddc -> 도서추가
 
-BookNonPaymentc -> 미납도서검색
+BookNonPaymentc -> 미납도서검색 
 
 
 4. 사용 VO
